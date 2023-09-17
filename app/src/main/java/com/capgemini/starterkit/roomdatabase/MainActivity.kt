@@ -17,7 +17,7 @@ import java.util.regex.Pattern
 
 class MainActivity : ComponentActivity() {
 
-    private val binding: ActivityMainBinding by lazy{
+    private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.inflate(layoutInflater, R.layout.activity_main, null, false)
     }
     private val viewModel: MainViewModel by viewModels {
@@ -45,6 +45,10 @@ class MainActivity : ComponentActivity() {
         binding.userName.addTextChangedListener {
             validateField()
         }
+
+        binding.projectId.addTextChangedListener {
+            validateField()
+        }
     }
 
     private fun initObservers() {
@@ -65,9 +69,16 @@ class MainActivity : ComponentActivity() {
 
     private fun buttonClickListener() {
         binding.buttonSave.setOnClickListener {
-            viewModel.insertData(MainInfoEntity(name = binding.userName.text.toString(), email =  binding.email.text.toString()))
+            viewModel.insertData(
+                MainInfoEntity(
+                    name = binding.userName.text.toString(),
+                    email = binding.email.text.toString(),
+                    projectId = binding.projectId.text.toString()
+                )
+            )
             binding.userName.text.clear()
             binding.email.text.clear()
+            binding.projectId.text.clear()
         }
     }
 
@@ -77,7 +88,10 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun validateField() {
-        if (isValidEmail(binding.email.text.toString()) && binding.userName.text.isNotEmpty()) {
+        if (isValidEmail(binding.email.text.toString()) &&
+            binding.userName.text.isNotEmpty() &&
+            binding.projectId.text.isNotEmpty()
+        ) {
             binding.buttonSave.isEnabled = true
             binding.buttonSave.setBackgroundColor(getColor(R.color.save_button))
         } else {

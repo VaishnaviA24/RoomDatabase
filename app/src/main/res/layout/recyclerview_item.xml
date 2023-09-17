@@ -17,6 +17,17 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/itemProjectId"
+        style="@style/word_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="start"
+        android:layout_weight="0.2"
+        tools:text="project id"
+        android:textColor="@color/black"/>
+
+    <TextView
         android:id="@+id/itemName"
         style="@style/word_title"
         tools:text="name"
