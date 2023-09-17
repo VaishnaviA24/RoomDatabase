@@ -19,3 +19,12 @@ interface MainEntryDao {
     suspend fun deleteById(u_id : Int)
 
 }
+
+@Dao
+interface ProjectDao {
+    @Insert
+    suspend fun insertProject(project: List<Project>)
+
+    @Query("SELECT * FROM project_details")
+    suspend fun getProjects(): List<Project>
+}

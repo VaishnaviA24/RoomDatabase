@@ -14,3 +14,8 @@ data class MainInfoEntity(
     val projectId: String
 )
 
+@Entity(tableName = "project_details")
+data class Project(
+    @PrimaryKey val projectId: Long = 0,
+    val projectName: String
+)

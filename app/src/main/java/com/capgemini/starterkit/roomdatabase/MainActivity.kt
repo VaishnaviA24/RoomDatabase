@@ -7,12 +7,16 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.capgemini.starterkit.roomdatabase.adapter.MainInfoAdapter
 import com.capgemini.starterkit.roomdatabase.databinding.ActivityMainBinding
 import com.capgemini.starterkit.roomdatabase.room.MainInfoEntity
 import com.capgemini.starterkit.roomdatabase.viewmodel.MainViewModel
 import com.capgemini.starterkit.roomdatabase.viewmodel.MainViewModelFactory
+import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModel
+import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModelFactory
 import java.util.Collections
+import java.util.Properties
 import java.util.regex.Pattern
 
 class MainActivity : ComponentActivity() {
@@ -23,12 +27,17 @@ class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory((MainApplication.getApplicationInstance()!!.repository))
     }
-
+    private val projectviewModel: ProjectViewModel by viewModels {
+        ProjectViewModelFactory((MainApplication.getApplicationInstance()!!.proj_repository))
+    }
     private val mainInfoAdapter = MainInfoAdapter()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        projectviewModel.insertValues()
 
         buttonClickListener()
         editTextClickListener()
