@@ -23,7 +23,7 @@ class MainInfoAdapter : ListAdapter<MainInfoEntity, MainInfoAdapter.MainInfoView
         }
 
         fun bind(mainInfoEntity: MainInfoEntity) {
-            binding.itemProjectId.text = mainInfoEntity.projectId
+            binding.itemProjectId.text = mainInfoEntity.userProjectId
             binding.itemName.text = mainInfoEntity.name
             binding.itemEmail.text = mainInfoEntity.email
         }

@@ -6,8 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.capgemini.starterkit.roomdatabase.adapter.MainInfoAdapter
 import com.capgemini.starterkit.roomdatabase.databinding.ActivityMainBinding
 import com.capgemini.starterkit.roomdatabase.room.MainInfoEntity
@@ -16,7 +14,6 @@ import com.capgemini.starterkit.roomdatabase.viewmodel.MainViewModelFactory
 import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModel
 import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModelFactory
 import java.util.Collections
-import java.util.Properties
 import java.util.regex.Pattern
 
 class MainActivity : ComponentActivity() {
@@ -38,6 +35,7 @@ class MainActivity : ComponentActivity() {
         setContentView(binding.root)
 
         projectviewModel.insertValues()
+        projectviewModel.getUserProjectValues()
 
         buttonClickListener()
         editTextClickListener()
@@ -61,10 +59,10 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun initObservers() {
-        viewModel.getAllData.observe(this, Observer { userInfo ->
+        viewModel.getAllData.observe(this) { userInfo ->
             Collections.reverse(userInfo)
             mainInfoAdapter.submitList(userInfo)
-        })
+        }
     }
 
     private fun setAdapterListener() {
@@ -82,7 +80,7 @@ class MainActivity : ComponentActivity() {
                 MainInfoEntity(
                     name = binding.userName.text.toString(),
                     email = binding.email.text.toString(),
-                    projectId = binding.projectId.text.toString()
+                    userProjectId = binding.projectId.text.toString()
                 )
             )
             binding.userName.text.clear()

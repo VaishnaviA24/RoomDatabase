@@ -21,4 +21,8 @@ class ProjectRepository(private val projectDao: ProjectDao) {
             projectDao.insertProject(projects)
         }
     }
+
+    fun getUserWithProjectValues(){
+        projectDao.getUserWithProject()
+    }
 }
