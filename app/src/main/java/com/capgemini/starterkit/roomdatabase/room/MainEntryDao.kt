@@ -38,9 +38,6 @@ interface ProjectDao {
     @Delete
     suspend fun delete(project: Project)
 
-    @Query("SELECT * FROM project_details")
-    suspend fun getProjects(): List<Project>
-
     @Query("SELECT * FROM project_details WHERE projectId = :id")
     suspend fun getProjectById(id: Long): Project?
 
