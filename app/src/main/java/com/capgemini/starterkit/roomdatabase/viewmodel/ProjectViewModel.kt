@@ -5,7 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.capgemini.starterkit.roomdatabase.repository.ProjectRepository
 import kotlinx.coroutines.launch
 
-class ProjectViewModel( private val project_repository: ProjectRepository
+class ProjectViewModel(
+    private val project_repository: ProjectRepository
 ) : ViewModel() {
 
     fun insertValues() {

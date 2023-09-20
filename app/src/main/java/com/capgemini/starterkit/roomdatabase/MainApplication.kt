@@ -5,12 +5,12 @@ import com.capgemini.starterkit.roomdatabase.repository.UserRepository
 import com.capgemini.starterkit.roomdatabase.repository.ProjectRepository
 import com.capgemini.starterkit.roomdatabase.room.MainInfoDatabase
 
-class MainApplication : Application(){
+class MainApplication : Application() {
     companion object {
         @Volatile
         private var INSTANCE: MainApplication? = null
 
-        fun getApplicationInstance() : MainApplication? {
+        fun getApplicationInstance(): MainApplication? {
             return INSTANCE
         }
     }

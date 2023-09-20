@@ -10,10 +10,10 @@ class ProjectRepository(private val projectDao: ProjectDao) {
     suspend fun insertProjectvalues() {
 
         val projects = listOf(
-            Project(1001,"ProjectOne"),
-            Project(2002,"ProjectTwo"),
-            Project(3003,"ProjectThree"),
-            Project(4004,"ProjectFour")
+            Project(1001, "ProjectOne"),
+            Project(2002, "ProjectTwo"),
+            Project(3003, "ProjectThree"),
+            Project(4004, "ProjectFour")
         )
 
         // Insert the static tasks using a Coroutine

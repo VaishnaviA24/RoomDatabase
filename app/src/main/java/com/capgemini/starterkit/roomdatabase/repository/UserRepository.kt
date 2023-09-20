@@ -12,7 +12,7 @@ class UserRepository(private val userDao: UserDao) {
         userDao.insertData(userInfo)
     }
 
-    suspend fun deleteById(u_id : Int){
+    suspend fun deleteById(u_id: Int) {
         userDao.deleteById(u_id)
     }
 

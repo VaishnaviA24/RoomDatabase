@@ -22,7 +22,7 @@ class UserViewModel(
         repository.insertData(userInfo)
     }
 
-    fun delete(userid : Int){
+    fun delete(userid: Int) {
         viewModelScope.launch {
             repository.deleteById(userid)
         }
