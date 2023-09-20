@@ -1,6 +1,7 @@
 package com.capgemini.starterkit.roomdatabase
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -35,8 +36,6 @@ class MainActivity : ComponentActivity() {
         setContentView(binding.root)
 
         projectviewModel.insertValues()
-        projectviewModel.getUserProjectValues()
-
         buttonClickListener()
         editTextClickListener()
         setAdapterListener()
