@@ -21,8 +21,8 @@ class MainApplication : Application() {
     }
 
     /** By using lazy the database and the repository are only created when they're needed
-     * rather than when the application starts
-     **/
+      rather than when the application starts **/
+
     private val database by lazy { MainInfoDatabase.getDatabase(this) }
     val repository by lazy { UserRepository(database.dataEntryDao()) }
     val proj_repository by lazy { ProjectRepository(database.projectDao()) }
