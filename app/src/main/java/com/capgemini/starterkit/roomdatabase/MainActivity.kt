@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
     }
     private val userAdapter = UserAdapter()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
