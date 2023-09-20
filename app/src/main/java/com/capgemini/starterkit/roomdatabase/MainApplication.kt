@@ -1,7 +1,7 @@
 package com.capgemini.starterkit.roomdatabase
 
 import android.app.Application
-import com.capgemini.starterkit.roomdatabase.repository.MainInfoRepository
+import com.capgemini.starterkit.roomdatabase.repository.UserRepository
 import com.capgemini.starterkit.roomdatabase.repository.ProjectRepository
 import com.capgemini.starterkit.roomdatabase.room.MainInfoDatabase
 
@@ -24,6 +24,6 @@ class MainApplication : Application(){
      * rather than when the application starts
      **/
     private val database by lazy { MainInfoDatabase.getDatabase(this) }
-    val repository by lazy { MainInfoRepository(database.dataEntryDao()) }
+    val repository by lazy { UserRepository(database.dataEntryDao()) }
     val proj_repository by lazy { ProjectRepository(database.projectDao()) }
 }

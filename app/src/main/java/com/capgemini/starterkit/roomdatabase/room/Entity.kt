@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 import androidx.room.Relation
 
 @Entity(tableName = "user_info", indices = [Index(value = ["email", "name"], unique = true)])
-data class MainInfoEntity(
+data class User(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "user_id")
     val id: Int = 0,
     val name: String,
@@ -24,7 +24,7 @@ data class Project(
 
 //this is for one-to-one relation
 data class UserWithProject(
-    @Embedded val userInfo: MainInfoEntity,
+    @Embedded val userInfo: User,
     @Relation(
         parentColumn = "userProjectId",
         entityColumn = "projectId"
@@ -39,5 +39,5 @@ data class UserWithMultipleProjects(
         parentColumn = "projectId",
         entityColumn = "userProjectId"
     )
-    val user: List<MainInfoEntity>
+    val user: List<User>
 )

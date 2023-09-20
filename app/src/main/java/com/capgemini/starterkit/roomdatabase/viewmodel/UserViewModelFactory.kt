@@ -2,13 +2,13 @@ package com.capgemini.starterkit.roomdatabase.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.capgemini.starterkit.roomdatabase.repository.MainInfoRepository
+import com.capgemini.starterkit.roomdatabase.repository.UserRepository
 
-class MainViewModelFactory(private val repository: MainInfoRepository): ViewModelProvider.Factory {
+class UserViewModelFactory(private val repository: UserRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(repository) as T
+            return UserViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

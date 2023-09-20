@@ -11,19 +11,19 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface MainEntryDao {
+interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertData(mainInfoEntity: MainInfoEntity)
+    suspend fun insertData(user: User)
 
     @Query("SELECT * FROM user_info")
-    fun getAllData(): Flow<List<MainInfoEntity>>
+    fun getAllData(): Flow<List<User>>
 
     @Query("delete from user_info where user_id = :u_id")
     suspend fun deleteById(u_id : Int)
 
     @Query("SELECT * FROM user_info WHERE user_id IN (:userIds)")
-    fun getUsersByIds(userIds: List<Long>): List<MainInfoEntity>
+    fun getUsersByIds(userIds: List<Long>): List<User>
 
 }
 

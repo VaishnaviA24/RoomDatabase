@@ -6,11 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
-import com.capgemini.starterkit.roomdatabase.adapter.MainInfoAdapter
+import com.capgemini.starterkit.roomdatabase.adapter.UserAdapter
 import com.capgemini.starterkit.roomdatabase.databinding.ActivityMainBinding
-import com.capgemini.starterkit.roomdatabase.room.MainInfoEntity
-import com.capgemini.starterkit.roomdatabase.viewmodel.MainViewModel
-import com.capgemini.starterkit.roomdatabase.viewmodel.MainViewModelFactory
+import com.capgemini.starterkit.roomdatabase.room.User
+import com.capgemini.starterkit.roomdatabase.viewmodel.UserViewModel
+import com.capgemini.starterkit.roomdatabase.viewmodel.UserViewModelFactory
 import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModel
 import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModelFactory
 import java.util.Collections
@@ -21,22 +21,20 @@ class MainActivity : ComponentActivity() {
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.inflate(layoutInflater, R.layout.activity_main, null, false)
     }
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory((MainApplication.getApplicationInstance()!!.repository))
+    private val viewModel: UserViewModel by viewModels {
+        UserViewModelFactory((MainApplication.getApplicationInstance()!!.repository))
     }
-    private val projectviewModel: ProjectViewModel by viewModels {
+    private val projectViewModel: ProjectViewModel by viewModels {
         ProjectViewModelFactory((MainApplication.getApplicationInstance()!!.proj_repository))
     }
-    private val mainInfoAdapter = MainInfoAdapter()
+    private val userAdapter = UserAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        projectviewModel.insertValues()
-        projectviewModel.getUserProjectValues()
-
+        projectViewModel.insertValues()
         buttonClickListener()
         editTextClickListener()
         setAdapterListener()
@@ -61,15 +59,15 @@ class MainActivity : ComponentActivity() {
     private fun initObservers() {
         viewModel.getAllData.observe(this) { userInfo ->
             Collections.reverse(userInfo)
-            mainInfoAdapter.submitList(userInfo)
+            userAdapter.submitList(userInfo)
         }
     }
 
     private fun setAdapterListener() {
-        binding.recyclerview.adapter = mainInfoAdapter
+        binding.recyclerview.adapter = userAdapter
 
         //deleting the row
-        mainInfoAdapter.itemClickListener = {
+        userAdapter.itemClickListener = {
             viewModel.delete(it.id)
         }
     }
@@ -77,7 +75,7 @@ class MainActivity : ComponentActivity() {
     private fun buttonClickListener() {
         binding.buttonSave.setOnClickListener {
             viewModel.insertData(
-                MainInfoEntity(
+                User(
                     name = binding.userName.text.toString(),
                     email = binding.email.text.toString(),
                     userProjectId = binding.projectId.text.toString()

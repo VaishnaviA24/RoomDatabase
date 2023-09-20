@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.databinding.RecyclerviewItemBinding
-import com.capgemini.starterkit.roomdatabase.room.MainInfoEntity
+import com.capgemini.starterkit.roomdatabase.room.User
 
-class MainInfoAdapter : ListAdapter<MainInfoEntity, MainInfoAdapter.MainInfoViewHolder>(MainInfoComparator()) {
+class UserAdapter : ListAdapter<User, UserAdapter.MainInfoViewHolder>(MainInfoComparator()) {
 
-    var itemClickListener: (MainInfoEntity) -> Unit = {}
+    var itemClickListener: (User) -> Unit = {}
     lateinit var binding: RecyclerviewItemBinding
 
     inner class MainInfoViewHolder(private val binding: RecyclerviewItemBinding) :
@@ -22,20 +22,20 @@ class MainInfoAdapter : ListAdapter<MainInfoEntity, MainInfoAdapter.MainInfoView
             }
         }
 
-        fun bind(mainInfoEntity: MainInfoEntity) {
-            binding.itemProjectId.text = mainInfoEntity.userProjectId
-            binding.itemName.text = mainInfoEntity.name
-            binding.itemEmail.text = mainInfoEntity.email
+        fun bind(user: User) {
+            binding.itemProjectId.text = user.userProjectId
+            binding.itemName.text = user.name
+            binding.itemEmail.text = user.email
         }
     }
 
 
-    class MainInfoComparator : DiffUtil.ItemCallback<MainInfoEntity>() {
-        override fun areItemsTheSame(oldItem: MainInfoEntity, newItem: MainInfoEntity): Boolean {
+    class MainInfoComparator : DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: MainInfoEntity, newItem: MainInfoEntity): Boolean {
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem.id == newItem.id
         }
     }

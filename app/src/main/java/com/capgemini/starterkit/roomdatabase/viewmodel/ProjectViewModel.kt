@@ -13,9 +13,4 @@ class ProjectViewModel( private val project_repository: ProjectRepository
             project_repository.insertProjectvalues()
         }
     }
-    fun getUserProjectValues(){
-        viewModelScope.launch{
-            project_repository.getUserWithProjectValues()
-        }
-    }
 }

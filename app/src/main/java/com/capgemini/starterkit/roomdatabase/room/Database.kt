@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [MainInfoEntity::class,Project::class], version = 2, exportSchema = false)
+@Database(entities = [User::class,Project::class], version = 1, exportSchema = false)
 abstract class MainInfoDatabase : RoomDatabase() {
 
-    abstract fun dataEntryDao(): MainEntryDao
+    abstract fun dataEntryDao(): UserDao
     abstract fun projectDao(): ProjectDao
 
     companion object {
