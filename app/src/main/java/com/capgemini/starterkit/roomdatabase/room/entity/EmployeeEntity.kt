@@ -17,7 +17,6 @@ data class EmployeeEntity(
     val empProjectId: String
 )
 
-
 //this is for one-to-one relation
 data class EmployeeWithProject(
     @Embedded val employeeEntityInfo: EmployeeEntity,
