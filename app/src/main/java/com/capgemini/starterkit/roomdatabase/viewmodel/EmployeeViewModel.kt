@@ -4,22 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.capgemini.starterkit.roomdatabase.repository.UserRepository
-import com.capgemini.starterkit.roomdatabase.room.User
+import com.capgemini.starterkit.roomdatabase.repository.EmployeeRepository
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import kotlinx.coroutines.launch
 
-class UserViewModel(
-    private val repository: UserRepository
+class EmployeeViewModel(
+    private val repository: EmployeeRepository
 ) : ViewModel() {
 
     // Creates a LiveData that has values collected from the origin Flow.
-    val getAllData: LiveData<List<User>> = repository.allUsersData.asLiveData()
+    val getAllData: LiveData<List<EmployeeEntity>> = repository.allUsersData.asLiveData()
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insertData(userInfo: User) = viewModelScope.launch {
-        repository.insertData(userInfo)
+    fun insertData(employeeEntityInfo: EmployeeEntity) = viewModelScope.launch {
+        repository.insertData(employeeEntityInfo)
     }
 
     fun delete(userid: Int) {

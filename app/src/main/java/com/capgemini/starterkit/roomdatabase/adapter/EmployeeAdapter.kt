@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.databinding.RecyclerviewItemBinding
-import com.capgemini.starterkit.roomdatabase.room.User
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 
-class UserAdapter : ListAdapter<User, UserAdapter.MainInfoViewHolder>(MainInfoComparator()) {
+class EmployeeAdapter : ListAdapter<EmployeeEntity, EmployeeAdapter.MainInfoViewHolder>(MainInfoComparator()) {
 
-    var itemClickListener: (User) -> Unit = {}
+    var itemClickListener: (EmployeeEntity) -> Unit = {}
     lateinit var binding: RecyclerviewItemBinding
 
     inner class MainInfoViewHolder(private val binding: RecyclerviewItemBinding) :
@@ -22,21 +22,20 @@ class UserAdapter : ListAdapter<User, UserAdapter.MainInfoViewHolder>(MainInfoCo
             }
         }
 
-        fun bind(user: User) {
-            binding.itemProjectId.text = user.userProjectId
-            binding.itemName.text = user.name
-            binding.itemEmail.text = user.email
+        fun bind(employeeEntity: EmployeeEntity) {
+            binding.itemProjectId.text = employeeEntity.empProjectId
+            binding.itemName.text = employeeEntity.name
+            binding.itemEmail.text = employeeEntity.email
         }
     }
 
-
-    class MainInfoComparator : DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+    class MainInfoComparator : DiffUtil.ItemCallback<EmployeeEntity>() {
+        override fun areItemsTheSame(oldItem: EmployeeEntity, newItem: EmployeeEntity): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: EmployeeEntity, newItem: EmployeeEntity): Boolean {
+            return oldItem.empId == newItem.empId
         }
     }
 

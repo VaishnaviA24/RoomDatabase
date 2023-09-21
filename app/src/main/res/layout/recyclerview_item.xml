@@ -24,7 +24,7 @@
         android:gravity="center"
         android:layout_gravity="start"
         android:layout_weight="0.2"
-        tools:text="project id"
+        tools:text="projectEntity id"
         android:textColor="@color/black"/>
 
     <TextView
