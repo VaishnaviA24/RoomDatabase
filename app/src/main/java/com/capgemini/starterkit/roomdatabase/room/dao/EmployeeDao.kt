@@ -28,6 +28,10 @@ interface EmployeeDao {
     @Query("SELECT * FROM Employee WHERE name LIKE :searchName")
     fun getEmpByName(searchName: String): List<EmployeeEntity>
 
+    //Returns the count of records
+    @Query("SELECT COUNT(*) FROM Employee")
+    fun getEmployeeCount(): Int
+
     //One-to-One Relationship
 //    @Transaction
 //    @Query("SELECT * FROM Employee")

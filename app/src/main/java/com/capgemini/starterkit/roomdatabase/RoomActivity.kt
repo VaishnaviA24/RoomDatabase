@@ -2,6 +2,7 @@ package com.capgemini.starterkit.roomdatabase
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +15,7 @@ import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 import com.capgemini.starterkit.roomdatabase.room.database.MyDatabase
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.viewmodel.EmployeeViewModel
+import java.util.regex.Pattern
 
 class RoomActivity : AppCompatActivity() {
 
@@ -32,9 +34,10 @@ class RoomActivity : AppCompatActivity() {
         employeeViewModel = EmployeeViewModel(EmployeeRepository(employeeDao))
 
 
-        binding.btnAddemp.setOnClickListener{
+        binding.btnAddemp.setOnClickListener {
             binding.container.removeAllViews()
-            val employeeForm = LayoutInflater.from(this).inflate(R.layout.employee_form, binding.container, true)
+            val employeeForm =
+                LayoutInflater.from(this).inflate(R.layout.employee_form, binding.container, true)
 
             val btnSave = employeeForm.findViewById<Button>(R.id.btn_empSave)
             val userName = employeeForm.findViewById<EditText>(R.id.userName)
@@ -45,12 +48,15 @@ class RoomActivity : AppCompatActivity() {
                 val name = userName.text.toString()
                 val userEmail = email.text.toString()
                 val projectID = projectId.text.toString()
-                val employee = EmployeeEntity(name = name, email = userEmail, empProjectId = projectID)
 
-                // Insert the employee data into the database
+                // If the projectID is empty, setting it to "DEFAULT"
+                val projectIdValue = projectID.ifEmpty { "DEFAULT" }
+
+                val employee =
+                    EmployeeEntity(name = name, email = userEmail, empProjectId = projectIdValue)
+
                 employeeViewModel.insertData(employee)
 
-                // Clear the form
                 userName.text.clear()
                 email.text.clear()
                 projectId.text.clear()
@@ -60,38 +66,32 @@ class RoomActivity : AppCompatActivity() {
         binding.btnDisplayemp.setOnClickListener {
             binding.container.removeAllViews()
 
-            // Inflate the employee list layout
-            val employeeListLayout = LayoutInflater.from(this).inflate(R.layout.employee_db, binding.container, false)
+            val employeeListLayout =
+                LayoutInflater.from(this).inflate(R.layout.employee_db, binding.container, false)
 
-            // Add the RecyclerView to the container
             binding.container.addView(employeeListLayout)
 
-            // Get the RecyclerView from the layout
             val recyclerView = employeeListLayout.findViewById<RecyclerView>(R.id.rv_empData)
 
-            // Set a LinearLayoutManager for the RecyclerView
             recyclerView.layoutManager = LinearLayoutManager(this)
 
-            // Create an adapter and set it to the RecyclerView
             val adapter = EmployeeListAdapter()
             recyclerView.adapter = adapter
 
-            // Observe the LiveData in the ViewModel and update the adapter when data changes
             employeeViewModel.getAllData.observe(this) { employees ->
                 adapter.submitList(employees)
             }
         }
 
-        binding.btnAddproject.setOnClickListener{
+        binding.btnAddproject.setOnClickListener {
             binding.container.removeAllViews()
             LayoutInflater.from(this).inflate(R.layout.project_form, binding.container, true)
         }
 
 
-        binding.btnDisplayproj.setOnClickListener{
+        binding.btnDisplayproj.setOnClickListener {
             binding.container.removeAllViews()
             LayoutInflater.from(this).inflate(R.layout.project_db, binding.container, true)
         }
-
     }
 }
