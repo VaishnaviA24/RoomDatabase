@@ -26,4 +26,16 @@ class EmployeeViewModel(
         }
     }
 
+    fun getEmpByIds(userIds: List<Int>) {
+        viewModelScope.launch {
+            repository.getEmpByIds(userIds)
+        }
+    }
+
+    fun getEmpByName(searchName: String) {
+        viewModelScope.launch {
+            repository.getEmpByName(searchName)
+        }
+    }
+
 }

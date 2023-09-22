@@ -9,8 +9,8 @@ import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.room.dao.ProjectDao
 import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 
-@Database(entities = [EmployeeEntity::class, ProjectEntity::class], version = 1, exportSchema = false)
-abstract class MainInfoDatabase : RoomDatabase() {
+@Database(entities = [EmployeeEntity::class, ProjectEntity::class], version = 2, exportSchema = false)
+abstract class MyDatabase : RoomDatabase() {
 
     abstract fun dataEntryDao(): EmployeeDao
     abstract fun projectDao(): ProjectDao
@@ -19,17 +19,17 @@ abstract class MainInfoDatabase : RoomDatabase() {
 
         // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
-        private var INSTANCE: MainInfoDatabase? = null
+        private var INSTANCE: MyDatabase? = null
 
         /** Note: When you modify the database schema,
         you'll need to update the version number and define a migration strategy.*/
 
-        fun getDatabase(ctx: Context): MainInfoDatabase {
+        fun getDatabase(ctx: Context): MyDatabase {
             return when (val temp = INSTANCE) {
                 null -> synchronized(this) {
                     Room.databaseBuilder(
-                        ctx.applicationContext, MainInfoDatabase::class.java,
-                        "user_info"
+                        ctx.applicationContext, MyDatabase::class.java,
+                        "DataBase"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

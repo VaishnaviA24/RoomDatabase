@@ -8,10 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.databinding.RecyclerviewItemBinding
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 
-class EmployeeAdapter : ListAdapter<EmployeeEntity, EmployeeAdapter.MainInfoViewHolder>(MainInfoComparator()) {
+class EmployeeAdapter : ListAdapter<EmployeeEntity,
+        EmployeeAdapter.MainInfoViewHolder>(MainInfoComparator()) {
 
     var itemClickListener: (EmployeeEntity) -> Unit = {}
     lateinit var binding: RecyclerviewItemBinding
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainInfoViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        binding = RecyclerviewItemBinding.inflate(inflater, parent, false)
+        return MainInfoViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MainInfoViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
 
     inner class MainInfoViewHolder(private val binding: RecyclerviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,24 +39,14 @@ class EmployeeAdapter : ListAdapter<EmployeeEntity, EmployeeAdapter.MainInfoView
             binding.itemEmail.text = employeeEntity.email
         }
     }
+}
 
-    class MainInfoComparator : DiffUtil.ItemCallback<EmployeeEntity>() {
-        override fun areItemsTheSame(oldItem: EmployeeEntity, newItem: EmployeeEntity): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: EmployeeEntity, newItem: EmployeeEntity): Boolean {
-            return oldItem.empId == newItem.empId
-        }
+class MainInfoComparator : DiffUtil.ItemCallback<EmployeeEntity>() {
+    override fun areItemsTheSame(oldItem: EmployeeEntity, newItem: EmployeeEntity): Boolean {
+        return oldItem === newItem
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainInfoViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        binding = RecyclerviewItemBinding.inflate(inflater, parent, false)
-        return MainInfoViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MainInfoViewHolder, position: Int) {
-        holder.bind(getItem(position))
+    override fun areContentsTheSame(oldItem: EmployeeEntity, newItem: EmployeeEntity): Boolean {
+        return oldItem.empId == newItem.empId
     }
 }

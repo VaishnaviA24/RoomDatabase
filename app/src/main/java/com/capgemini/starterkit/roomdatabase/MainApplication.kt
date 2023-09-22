@@ -3,7 +3,7 @@ package com.capgemini.starterkit.roomdatabase
 import android.app.Application
 import com.capgemini.starterkit.roomdatabase.repository.EmployeeRepository
 import com.capgemini.starterkit.roomdatabase.repository.ProjectRepository
-import com.capgemini.starterkit.roomdatabase.room.database.MainInfoDatabase
+import com.capgemini.starterkit.roomdatabase.room.database.MyDatabase
 
 class MainApplication : Application() {
     companion object {
@@ -23,7 +23,7 @@ class MainApplication : Application() {
     /** By using lazy the database and the repository are only created when they're needed
       rather than when the application starts **/
 
-    private val database by lazy { MainInfoDatabase.getDatabase(this) }
+    private val database by lazy { MyDatabase.getDatabase(this) }
     val repository by lazy { EmployeeRepository(database.dataEntryDao()) }
     val proj_repository by lazy { ProjectRepository(database.projectDao()) }
 }

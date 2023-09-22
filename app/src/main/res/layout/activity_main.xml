@@ -26,9 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-
-
-            <EditText
+        <EditText
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +89,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView"
-        tools:listitem="@layout/recyclerview_item" />
+        tools:listitem="@layout/rvempitem" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

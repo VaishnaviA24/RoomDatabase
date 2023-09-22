@@ -16,4 +16,12 @@ class EmployeeRepository(private val employeeDao: EmployeeDao) {
         employeeDao.deleteById(u_id)
     }
 
+    fun getEmpByIds(userIds: List<Int>): List<EmployeeEntity> {
+        return employeeDao.getEmpByIds(userIds)
+    }
+
+    fun getEmpByName(searchName: String): List<EmployeeEntity> {
+        return employeeDao.getEmpByName(searchName)
+    }
+
 }

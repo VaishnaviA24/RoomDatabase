@@ -10,14 +10,16 @@ import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 
 @Dao
 interface ProjectDao {
+
+    //bulk data insert
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProject(projectEntity: List<ProjectEntity>)
 
     @Update
-    suspend fun update(projectEntity: ProjectEntity)
+    suspend fun updateProject(projectEntity: ProjectEntity)
 
     @Delete
-    suspend fun delete(projectEntity: ProjectEntity)
+    suspend fun deleteProject(projectEntity: ProjectEntity)
 
     @Query("SELECT * FROM Project ORDER BY projectName ASC")
     fun getProjectsSortedByName(): List<ProjectEntity>
