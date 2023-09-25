@@ -3,10 +3,10 @@ package com.capgemini.starterkit.roomdatabase
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.adapter.EmployeeListAdapter
@@ -21,7 +21,6 @@ import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 import com.capgemini.starterkit.roomdatabase.viewmodel.EmployeeViewModel
 import com.capgemini.starterkit.roomdatabase.viewmodel.ProjectViewModel
-import java.util.regex.Pattern
 
 class RoomActivity : AppCompatActivity() {
 
@@ -110,9 +109,11 @@ class RoomActivity : AppCompatActivity() {
                 val projectName = projName.text.toString()
                 val projectId = projId.text.toString()
 
+                val projectIdValue = projectId.ifEmpty { "DEFAULT" }
+
                 val projectEntity = ProjectEntity(
                     projectName = projectName,
-                    projectId = projectId.toInt(),
+                    projectId = projectIdValue,
                 )
 
                 projectViewModel.insertProjectValue(projectEntity)
@@ -121,7 +122,6 @@ class RoomActivity : AppCompatActivity() {
                 projId.text.clear()
             }
         }
-
 
         binding.btnDisplayproj.setOnClickListener {
             binding.container.removeAllViews()
@@ -134,12 +134,53 @@ class RoomActivity : AppCompatActivity() {
 
             recyclerView.layoutManager = LinearLayoutManager(this)
 
-            val adapter = ProjectListAdapter()
+            val adapter = ProjectListAdapter(
+                editClickListener = { project ->
+                    updateProjectDialog(project)
+                },
+                deleteClickListener = { project ->
+                    projectViewModel.deleteById(project)
+                }
+            )
             recyclerView.adapter = adapter
 
             projectViewModel.getAllProjData.observe(this) { projects ->
                 adapter.submitList(projects)
             }
+        }
+    }
+
+    @SuppressLint("MissingInflatedId")
+    private fun updateProjectDialog(project: ProjectEntity) {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.edit_project_dialog, null)
+
+        dialogBuilder.setView(dialogView)
+
+        val etProjectId = dialogView.findViewById<EditText>(R.id.et_newProjId)
+        val etProjectName = dialogView.findViewById<EditText>(R.id.et_newProjName)
+        val btnUpdate = dialogView.findViewById<Button>(R.id.btn_updateProject)
+
+        etProjectId.setText(project.projectId.toString())
+        etProjectName.setText(project.projectName)
+
+        dialogBuilder.setTitle("Edit Project")
+
+        dialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+
+        val dialog = dialogBuilder.create()
+        dialog.show()
+
+        btnUpdate.setOnClickListener {
+            val updatedProjectId = etProjectId.text.toString()
+            val updatedProjectName = etProjectName.text.toString()
+            val updatedProject =
+                project.copy(projectId = updatedProjectId, projectName = updatedProjectName)
+            projectViewModel.updateById(updatedProject)
+            dialog.dismiss()
         }
     }
 }

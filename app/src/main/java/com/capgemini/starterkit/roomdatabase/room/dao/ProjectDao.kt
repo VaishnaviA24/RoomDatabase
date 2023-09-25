@@ -34,4 +34,5 @@ interface ProjectDao {
     // Returns the count of records
     @Query("SELECT COUNT(*) FROM Project")
     fun getProjectCount(): Int
+
 }

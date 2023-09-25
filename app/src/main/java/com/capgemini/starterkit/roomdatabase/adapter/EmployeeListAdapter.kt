@@ -11,8 +11,11 @@ import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 class EmployeeListAdapter : ListAdapter<EmployeeEntity,
         EmployeeListAdapter.EmployeeViewHolder>(EmployeeDiffCallback()) {
 
+    lateinit var binding: RvempitemBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
-        val binding = RvempitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val inflater = LayoutInflater.from(parent.context)
+        binding = RvempitemBinding.inflate(inflater, parent, false)
         return EmployeeViewHolder(binding)
     }
 

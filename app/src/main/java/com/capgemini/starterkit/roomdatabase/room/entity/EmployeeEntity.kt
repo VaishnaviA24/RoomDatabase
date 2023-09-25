@@ -1,5 +1,6 @@
 package com.capgemini.starterkit.roomdatabase.room.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -15,7 +16,7 @@ data class EmployeeEntity(
     val empProjectId: String
 )
 
-//this is for one-to-one relation
+////this is for one-to-one relation
 //data class EmployeeWithProject(
 //    @Embedded val employeeEntityInfo: EmployeeEntity,
 //    @Relation(

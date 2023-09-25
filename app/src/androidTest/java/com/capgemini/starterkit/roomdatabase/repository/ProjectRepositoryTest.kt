@@ -16,8 +16,6 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
 
 @RunWith(AndroidJUnit4::class)
 class ProjectRepositoryTest {
@@ -46,14 +44,14 @@ class ProjectRepositoryTest {
         val projectsFromDb = projectDao.getAllProjects().firstOrNull()
         assertNotNull(projectsFromDb)
         Log.d("ProjectRepositoryTest", "insertProjects - Number of projects: ${projectsFromDb!!.size}")
-        assertEquals(4, projectsFromDb!!.size)
+        assertEquals(4, projectsFromDb.size)
     }
 
     @Test
     fun insertAndGetProjectValue() = runBlocking {
         val project =
             ProjectEntity(
-                projectId = 1,
+                projectId = "1",
                 projectName = "TestProj"
             )
         projectRepository.insertProjectValue(project)
@@ -66,22 +64,22 @@ class ProjectRepositoryTest {
 
     @Test
     fun updateProject() = runBlocking {
-        val project = ProjectEntity(1, "TestProject")
+        val project = ProjectEntity("1", "TestProject")
         projectRepository.insertProjectValue(project)
 
-        val updatedProject = ProjectEntity(1, "UpdatedProject")
+        val updatedProject = ProjectEntity("1", "UpdatedProject")
         projectRepository.updateProject(updatedProject)
 
         val projectsFromDb = projectRepository.allProjectsData.firstOrNull()
         Log.d("ProjectRepositoryTest", "updateProject - Updated project: ${projectsFromDb!![0]}")
         assertNotNull(projectsFromDb)
-                assertEquals(1, projectsFromDb!!.size)
+                assertEquals(1, projectsFromDb.size)
         assertEquals(updatedProject, projectsFromDb[0])
     }
 
     @Test
     fun deleteProject() = runBlocking {
-        val project = ProjectEntity(1, "TestProject")
+        val project = ProjectEntity("1", "TestProject")
         projectRepository.insertProjectValue(project)
 
         projectRepository.deleteProject(project)
@@ -89,6 +87,6 @@ class ProjectRepositoryTest {
         val projectsFromDb = projectRepository.allProjectsData.firstOrNull()
         Log.d("ProjectRepositoryTest", "deleteProject - Table size: ${projectsFromDb!!.size}")
         assertNotNull(projectsFromDb)
-        assertTrue(projectsFromDb.isNullOrEmpty())
+        assertTrue(projectsFromDb.isEmpty())
     }
 }

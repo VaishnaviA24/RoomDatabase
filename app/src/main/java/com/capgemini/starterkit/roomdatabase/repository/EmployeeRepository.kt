@@ -2,6 +2,8 @@ package com.capgemini.starterkit.roomdatabase.repository
 
 import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithMultipleProjects
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithProject
 import kotlinx.coroutines.flow.Flow
 
 class EmployeeRepository(private val employeeDao: EmployeeDao) {
@@ -12,8 +14,8 @@ class EmployeeRepository(private val employeeDao: EmployeeDao) {
         employeeDao.insertData(employeeEntityInfo)
     }
 
-    suspend fun deleteById(u_id: Int) {
-        employeeDao.deleteById(u_id)
+    suspend fun deleteById(uId: Int) {
+        employeeDao.deleteById(uId)
     }
 
     fun getEmpByIds(userIds: List<Int>): List<EmployeeEntity> {
@@ -22,6 +24,14 @@ class EmployeeRepository(private val employeeDao: EmployeeDao) {
 
     fun getEmpByName(searchName: String): List<EmployeeEntity> {
         return employeeDao.getEmpByName(searchName)
+    }
+
+    fun getEmployeeWithProject(employeeId: Int): EmployeeWithProject {
+        return employeeDao.getEmployeeWithProject(employeeId)
+    }
+
+    fun getEmployeeWithMultipleProjects(employeeId: Int): EmployeeWithMultipleProjects {
+        return employeeDao.getEmployeeWithMultipleProjects(employeeId)
     }
 
 }

@@ -7,6 +7,6 @@ private const val TableName = "Project"
 
 @Entity(tableName = TableName)
 data class ProjectEntity(
-    @PrimaryKey val projectId: Int = 0,
+    @PrimaryKey val projectId: String = "DEFAULT",
     val projectName: String
 )

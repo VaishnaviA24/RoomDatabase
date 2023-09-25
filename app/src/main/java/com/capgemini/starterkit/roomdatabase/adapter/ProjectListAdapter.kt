@@ -5,14 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.capgemini.starterkit.roomdatabase.databinding.RecyclerviewItemBinding
 import com.capgemini.starterkit.roomdatabase.databinding.RvprojitemBinding
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 
-class ProjectListAdapter : ListAdapter<ProjectEntity,
+class ProjectListAdapter(
+    private val editClickListener: (ProjectEntity) -> Unit,
+    private val deleteClickListener: (ProjectEntity) -> Unit
+) : ListAdapter<ProjectEntity,
         ProjectListAdapter.ProjectViewHolder>(ProjectDiffCallback()) {
 
+    lateinit var binding: RvprojitemBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        val binding = RvprojitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = RvprojitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProjectViewHolder(binding)
     }
 
@@ -27,6 +34,9 @@ class ProjectListAdapter : ListAdapter<ProjectEntity,
         fun bind(project: ProjectEntity) {
             binding.tvProjId.text = project.projectId.toString()
             binding.tvProjName.text = project.projectName
+
+            binding.icProjEdit.setOnClickListener { editClickListener(project) }
+            binding.icProjDelete.setOnClickListener { deleteClickListener(project) }
         }
     }
 }

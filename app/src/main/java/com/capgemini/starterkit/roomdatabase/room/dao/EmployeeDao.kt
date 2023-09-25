@@ -4,7 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithMultipleProjects
+import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithProject
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,8 +18,8 @@ interface EmployeeDao {
     suspend fun insertData(employeeEntity: EmployeeEntity)
 
     //deleting data
-    @Query("delete from Employee where empId = :u_id")
-    suspend fun deleteById(u_id: Int)
+    @Query("delete from Employee where empId = :uId")
+    suspend fun deleteById(uId: Int)
 
     @Query("SELECT * FROM Employee")
     fun getAllData(): Flow<List<EmployeeEntity>>
@@ -32,14 +35,12 @@ interface EmployeeDao {
     @Query("SELECT COUNT(*) FROM Employee")
     fun getEmployeeCount(): Int
 
-    //One-to-One Relationship
-//    @Transaction
-//    @Query("SELECT * FROM Employee")
-//    fun getUserWithProject(): List<EmployeeWithProject>
-//
-//    //One-to-Many Relationship
-//    @Transaction
-//    @Query("SELECT * FROM Project")
-//    fun getUserWithMultipleProjects(): List<EmpWithMultipleProjects>
+    @Transaction
+    @Query("SELECT * FROM Employee WHERE empId = :employeeId")
+    fun getEmployeeWithProject(employeeId: Int): EmployeeWithProject
+
+    @Transaction
+    @Query("SELECT * FROM Employee WHERE empId = :employeeId")
+    fun getEmployeeWithMultipleProjects(employeeId: Int): EmployeeWithMultipleProjects
 
 }

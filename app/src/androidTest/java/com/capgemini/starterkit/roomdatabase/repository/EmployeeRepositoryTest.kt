@@ -8,10 +8,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 import com.capgemini.starterkit.roomdatabase.room.database.MyDatabase
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
+import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before

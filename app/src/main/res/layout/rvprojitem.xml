@@ -40,7 +40,7 @@
         />
 
     <ImageView
-        android:id="@+id/editIcon"
+        android:id="@+id/ic_projEdit"
         android:src="@drawable/ic_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,10 +48,11 @@
         android:layout_gravity="end"
         android:scaleType="center"
         android:layout_weight="0.2"
+        android:onClick="onEditClick"
         tools:text="email" />
 
     <ImageView
-        android:id="@+id/deleteIcon"
+        android:id="@+id/ic_projDelete"
         android:src="@drawable/ic_baseline_delete_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +60,7 @@
         android:layout_gravity="end"
         android:scaleType="center"
         android:layout_weight="0.2"
+        android:onClick="onDeleteClick"
         tools:text="email" />
 
     </TableRow>
