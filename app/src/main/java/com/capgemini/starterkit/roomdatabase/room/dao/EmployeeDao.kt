@@ -21,7 +21,7 @@ interface EmployeeDao {
     @Query("SELECT * FROM Employee")
     fun getAllData(): Flow<List<EmployeeEntity>>
 
-    //selecting data from bulk
+    //selecting data in bulk
     @Query("SELECT * FROM Employee WHERE empId IN (:userIds)")
     fun getEmpByIds(userIds: List<Int>): List<EmployeeEntity>
 

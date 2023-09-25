@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        projectViewModel.insertValues()
+        projectViewModel.insertProjects()
         buttonClickListener()
         editTextClickListener()
         setAdapterListener()

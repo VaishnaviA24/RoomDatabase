@@ -15,6 +15,16 @@
         android:text="Enter project data" />
 
     <EditText
+        android:id="@+id/projectId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
+        android:ems="10"
+        android:hint="Project Id"
+        android:inputType="number"
+        android:singleLine="true" />
+
+    <EditText
         android:id="@+id/projName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,23 +34,12 @@
         android:inputType="text"
         android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/projectId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/medium_margin"
-        android:ems="10"
-        android:hint="Project Id"
-        android:inputType="text"
-        android:singleLine="true" />
-
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/btn_projSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
         android:background="@color/colorPrimary"
-        android:enabled="false"
         android:text="@string/button_save"
         android:textColor="@color/buttonLabel" />
 </LinearLayout>

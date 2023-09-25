@@ -2,13 +2,15 @@ package com.capgemini.starterkit.roomdatabase.repository
 
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 import com.capgemini.starterkit.roomdatabase.room.dao.ProjectDao
-import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class ProjectRepository(private val projectDao: ProjectDao) {
 
-    suspend fun insertProjectvalues() {
+    var allProjectsData: Flow<List<ProjectEntity>> = projectDao.getAllProjects()
+
+    suspend fun insertProjects() {
 
         val projectEntities = listOf(
             ProjectEntity(1001, "ProjectOne"),
@@ -19,15 +21,19 @@ class ProjectRepository(private val projectDao: ProjectDao) {
 
         // Insert the static tasks using a Coroutine
         withContext(Dispatchers.IO) {
-            projectDao.insertProject(projectEntities)
+            projectDao.insertProjects(projectEntities)
         }
     }
 
-    suspend fun updateProjectById(projectEntity: ProjectEntity) {
+    suspend fun insertProjectValue(projectEntity: ProjectEntity) {
+        projectDao.insertProjectValue(projectEntity)
+    }
+
+    suspend fun updateProject(projectEntity: ProjectEntity) {
         projectDao.updateProject(projectEntity)
     }
 
-    suspend fun deleteProjectById(projectEntity: ProjectEntity) {
+    suspend fun deleteProject(projectEntity: ProjectEntity) {
         projectDao.deleteProject(projectEntity)
     }
 }

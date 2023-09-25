@@ -7,13 +7,20 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProjectDao {
 
-    //bulk data insert
+    // Bulk data insert
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertProject(projectEntity: List<ProjectEntity>)
+    suspend fun insertProjects(projects: List<ProjectEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProjectValue(projectEntity: ProjectEntity)
+
+    @Query("SELECT * FROM Project")
+    fun getAllProjects(): Flow<List<ProjectEntity>>
 
     @Update
     suspend fun updateProject(projectEntity: ProjectEntity)
@@ -24,8 +31,7 @@ interface ProjectDao {
     @Query("SELECT * FROM Project ORDER BY projectName ASC")
     fun getProjectsSortedByName(): List<ProjectEntity>
 
-    //Returns the count of records
+    // Returns the count of records
     @Query("SELECT COUNT(*) FROM Project")
     fun getProjectCount(): Int
-
 }
