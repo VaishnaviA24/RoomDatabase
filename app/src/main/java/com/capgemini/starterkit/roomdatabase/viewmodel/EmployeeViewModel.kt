@@ -43,26 +43,3 @@ class EmployeeViewModel(
         return repository.getEmployeeWithProject(projectId)
     }
 }
-
-
-//    fun getEmployeeWithProject(employeeId: Int): LiveData<EmployeeWithProject> {
-//        val liveData = MutableLiveData<EmployeeWithProject>()
-//
-//        viewModelScope.launch {
-//            val result = repository.getEmployeeWithProject(employeeId)
-//            liveData.postValue(result)
-//        }
-//
-//        return liveData
-//    }
-//
-//    fun getEmployeeWithMultipleProjects(employeeId: Int): LiveData<EmployeeWithMultipleProjects> {
-//        val liveData = MutableLiveData<EmployeeWithMultipleProjects>()
-//
-//        viewModelScope.launch {
-//            val result = repository.getEmployeeWithMultipleProjects(employeeId)
-//            liveData.postValue(result)
-//        }
-//
-//        return liveData
-//    }

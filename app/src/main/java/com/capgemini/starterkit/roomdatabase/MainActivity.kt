@@ -2,11 +2,12 @@ package com.capgemini.starterkit.roomdatabase
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.adapter.EmployeeListAdapter
@@ -46,26 +47,48 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnAddemp.setOnClickListener {
             binding.container.removeAllViews()
+
+            binding.etEmpvalue.visibility = View.GONE
+            binding.btnSearchEmp.visibility = View.GONE
+            binding.tvProjCount.visibility = View.GONE
+            binding.btnAscProjValue.visibility = View.GONE
+
             addEmployee()
         }
 
         binding.btnDisplayemp.setOnClickListener {
             binding.container.removeAllViews()
 
-            binding.btnSearchEmp.isVisible = true
-            binding.etEmpvalue.isVisible = true
+            binding.etEmpvalue.visibility = View.VISIBLE
+            binding.btnSearchEmp.visibility = View.VISIBLE
+            binding.tvProjCount.visibility = View.GONE
+            binding.btnAscProjValue.visibility = View.GONE
+
             displayEmployeeData()
         }
 
         binding.btnAddproject.setOnClickListener {
             binding.container.removeAllViews()
+
+            binding.etEmpvalue.visibility = View.GONE
+            binding.btnSearchEmp.visibility = View.GONE
+            binding.tvProjCount.visibility = View.GONE
+            binding.btnAscProjValue.visibility = View.GONE
+
             addProject()
         }
 
         binding.btnDisplayproj.setOnClickListener {
             binding.container.removeAllViews()
+
+            binding.etEmpvalue.visibility = View.GONE
+            binding.btnSearchEmp.visibility = View.GONE
+            binding.tvProjCount.visibility = View.VISIBLE
+            binding.btnAscProjValue.visibility = View.VISIBLE
+
             displayProjectData()
         }
+
     }
 
     private fun displayProjectData() {
@@ -164,6 +187,19 @@ class MainActivity : AppCompatActivity() {
             email.text.clear()
             projectId.text.clear()
         }
+
+        binding.btnSearchEmp.setOnClickListener {
+            val searchValue = binding.etEmpvalue.text.toString()
+
+            if(searchValue.isEmpty()){
+                showToast("Please enter some value")
+            }else{
+                if(searchValue.toIntOrNull() != null){
+                    val empId = searchValue.toInt()
+                }
+            }
+
+        }
     }
 
     private fun updateProjectDialog(project: ProjectEntity) {
@@ -197,5 +233,9 @@ class MainActivity : AppCompatActivity() {
             projectViewModel.updateById(updatedProject)
             dialog.dismiss()
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
