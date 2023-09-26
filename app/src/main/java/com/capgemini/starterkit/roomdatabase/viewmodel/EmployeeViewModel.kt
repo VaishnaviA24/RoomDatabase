@@ -13,14 +13,11 @@ class EmployeeViewModel(
     private val repository: EmployeeRepository
 ) : ViewModel() {
 
-    // Creates a LiveData that has values collected from the origin Flow.
     val getAllData: LiveData<List<EmployeeEntity>> = repository.allUsersData.asLiveData()
 
-    //Launching a new coroutine to insert the data in a non-blocking way
     fun insertData(employeeEntityInfo: EmployeeEntity) = viewModelScope.launch {
         repository.insertData(employeeEntityInfo)
     }
-
     fun delete(userid: Int) {
         viewModelScope.launch {
             repository.deleteById(userid)

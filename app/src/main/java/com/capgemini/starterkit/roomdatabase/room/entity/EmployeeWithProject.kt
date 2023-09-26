@@ -11,12 +11,3 @@ data class EmployeeWithProject(
     )
     val employees: List<EmployeeEntity> // Changed to List<EmployeeEntity>
 )
-
-//data class EmployeeWithMultipleProjects(
-//    @Embedded val employeeEntity: EmployeeEntity,
-//    @Relation(
-//        parentColumn = "empProjectId",
-//        entityColumn = "projectId"
-//    )
-//    val projects: List<ProjectEntity>
-//)
