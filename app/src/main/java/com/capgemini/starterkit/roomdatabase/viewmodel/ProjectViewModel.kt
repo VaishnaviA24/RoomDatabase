@@ -5,37 +5,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.capgemini.starterkit.roomdatabase.repository.ProjectRepository
-import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 import kotlinx.coroutines.launch
 
 class ProjectViewModel(
-    private val project_repository: ProjectRepository
+    private val projectRepository: ProjectRepository
 ) : ViewModel() {
 
-    val getAllProjData: LiveData<List<ProjectEntity>> = project_repository.allProjectsData.asLiveData()
+    val getAllProjData: LiveData<List<ProjectEntity>> = projectRepository.allProjectsData.asLiveData()
 
     fun insertProjects() {
         viewModelScope.launch {
-            project_repository.insertProjects()
+            projectRepository.insertProjects()
         }
     }
 
     fun insertProjectValue(projectEntity: ProjectEntity) {
         viewModelScope.launch {
-            project_repository.insertProjectValue(projectEntity)
+            projectRepository.insertProjectValue(projectEntity)
         }
     }
 
     fun updateById(projectEntity: ProjectEntity) {
         viewModelScope.launch {
-            project_repository.updateProject(projectEntity)
+            projectRepository.updateProject(projectEntity)
         }
     }
 
     fun deleteById(projectEntity: ProjectEntity) {
         viewModelScope.launch {
-            project_repository.deleteProject(projectEntity)
+            projectRepository.deleteProject(projectEntity)
         }
     }
 

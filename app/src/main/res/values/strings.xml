@@ -2,12 +2,23 @@
     <string name="app_name">RoomDataBase</string>
 
     <!-- Strings used for fragments for navigation -->
-    <string name="hint_word">Word...</string>
     <string name="button_save">Save</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
-    <string name="add_word">Add word</string>
-    <string name="main_fragment">Main Fragment</string>
-    <string name="add_fragment">Add User</string>
     <string name="page_title">Enter Your Data</string>
+    <string name="add_user">Add User</string>
+    <string name="add_project">Add project</string>
+    <string name="display_employee_data">Display Employee Data</string>
+    <string name="display_project_data">Display Project Data</string>
+    <string name="enter_either_employee_id_or_name">Enter either Employee id or name</string>
+    <string name="search">Search</string>
+    <string name="edit_project">Edit Project</string>
+    <string name="project_id">Project Id</string>
+    <string name="project_name">Project Name</string>
+    <string name="update">Update</string>
+    <string name="username">UserName</string>
+    <string name="email">Email</string>
+    <string name="sort_in_ascending_order">Sort in ascending order</string>
+    <string name="count">Count :</string>
+    <string name="enter_project_data">Enter project data</string>
+    <string name="delete">delete</string>
 
 </resources>

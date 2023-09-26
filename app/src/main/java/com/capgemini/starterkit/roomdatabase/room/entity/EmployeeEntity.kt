@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-private const val TableName = "Employee"
+private const val EMP_TABLE_NAME = "Employee"
 
-@Entity(tableName = TableName, indices = [Index(value = ["email", "name"], unique = true)])
+@Entity(tableName = EMP_TABLE_NAME, indices = [Index(value = ["email", "name"], unique = true)])
 data class EmployeeEntity(
     @PrimaryKey(autoGenerate = true)
     val empId: Int = 0,

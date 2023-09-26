@@ -7,10 +7,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:padding="16dp"
-        android:text="Edit Project"
+        android:padding="@dimen/dim_16dp"
+        android:textColor="@color/white"
+        android:text="@string/edit_project"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -18,19 +19,21 @@
         android:id="@+id/et_newProjId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Project Id"
+        android:layout_margin="@dimen/dim_16dp"
+        android:hint="@string/project_id"
         android:inputType="number"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:autofillHints="@string/project_id" />
 
     <EditText
         android:id="@+id/et_newProjName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Project Name"
+        android:layout_margin="@dimen/dim_16dp"
+        android:hint="@string/project_name"
         android:inputType="text"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:autofillHints="@string/project_name" />
 
     <Button
         android:id="@+id/btn_updateProject"
@@ -38,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
         android:background="@color/colorPrimary"
-        android:text="Update"
+        android:text="@string/update"
         android:textColor="@color/black" />
 
 </LinearLayout>

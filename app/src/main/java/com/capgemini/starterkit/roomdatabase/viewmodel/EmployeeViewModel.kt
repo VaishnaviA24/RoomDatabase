@@ -1,13 +1,11 @@
 package com.capgemini.starterkit.roomdatabase.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.capgemini.starterkit.roomdatabase.repository.EmployeeRepository
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
-import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithMultipleProjects
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithProject
 import kotlinx.coroutines.launch
 
@@ -41,26 +39,30 @@ class EmployeeViewModel(
         }
     }
 
-    fun getEmployeeWithProject(employeeId: Int): LiveData<EmployeeWithProject> {
-        val liveData = MutableLiveData<EmployeeWithProject>()
-
-        viewModelScope.launch {
-            val result = repository.getEmployeeWithProject(employeeId)
-            liveData.postValue(result)
-        }
-
-        return liveData
+    fun getEmployeeWithProject(projectId: String): List<EmployeeWithProject> {
+        return repository.getEmployeeWithProject(projectId)
     }
-
-    fun getEmployeeWithMultipleProjects(employeeId: Int): LiveData<EmployeeWithMultipleProjects> {
-        val liveData = MutableLiveData<EmployeeWithMultipleProjects>()
-
-        viewModelScope.launch {
-            val result = repository.getEmployeeWithMultipleProjects(employeeId)
-            liveData.postValue(result)
-        }
-
-        return liveData
-    }
-
 }
+
+
+//    fun getEmployeeWithProject(employeeId: Int): LiveData<EmployeeWithProject> {
+//        val liveData = MutableLiveData<EmployeeWithProject>()
+//
+//        viewModelScope.launch {
+//            val result = repository.getEmployeeWithProject(employeeId)
+//            liveData.postValue(result)
+//        }
+//
+//        return liveData
+//    }
+//
+//    fun getEmployeeWithMultipleProjects(employeeId: Int): LiveData<EmployeeWithMultipleProjects> {
+//        val liveData = MutableLiveData<EmployeeWithMultipleProjects>()
+//
+//        viewModelScope.launch {
+//            val result = repository.getEmployeeWithMultipleProjects(employeeId)
+//            liveData.postValue(result)
+//        }
+//
+//        return liveData
+//    }

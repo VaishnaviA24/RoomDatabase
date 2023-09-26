@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.capgemini.starterkit.roomdatabase.databinding.RecyclerviewItemBinding
 import com.capgemini.starterkit.roomdatabase.databinding.RvprojitemBinding
-import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 
 class ProjectListAdapter(
@@ -16,7 +14,7 @@ class ProjectListAdapter(
 ) : ListAdapter<ProjectEntity,
         ProjectListAdapter.ProjectViewHolder>(ProjectDiffCallback()) {
 
-    lateinit var binding: RvprojitemBinding
+    private lateinit var binding: RvprojitemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
         binding = RvprojitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,7 +30,7 @@ class ProjectListAdapter(
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(project: ProjectEntity) {
-            binding.tvProjId.text = project.projectId.toString()
+            binding.tvProjId.text = project.projectId
             binding.tvProjName.text = project.projectName
 
             binding.icProjEdit.setOnClickListener { editClickListener(project) }

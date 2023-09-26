@@ -16,10 +16,9 @@
         tools:listitem="@layout/rvprojitem" />
 
     <Button
-        android:id="@+id/btn_ascending"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sort in ascending order"
+        android:text="@string/sort_in_ascending_order"
         app:layout_constraintBottom_toTopOf="@+id/rv_projData"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +29,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Count : "
+        android:text="@string/count"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/rv_projData"

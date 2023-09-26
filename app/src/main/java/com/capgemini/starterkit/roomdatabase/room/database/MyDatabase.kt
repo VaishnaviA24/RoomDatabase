@@ -9,7 +9,11 @@ import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 import com.capgemini.starterkit.roomdatabase.room.dao.ProjectDao
 import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 
-@Database(entities = [EmployeeEntity::class, ProjectEntity::class], version = 2, exportSchema = false)
+@Database(
+    entities = [EmployeeEntity::class, ProjectEntity::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class MyDatabase : RoomDatabase() {
 
     abstract fun dataEntryDao(): EmployeeDao
@@ -17,12 +21,8 @@ abstract class MyDatabase : RoomDatabase() {
 
     companion object {
 
-        // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
         private var INSTANCE: MyDatabase? = null
-
-        /** Note: When you modify the database schema,
-        you'll need to update the version number and define a migration strategy.*/
 
         fun getDatabase(ctx: Context): MyDatabase {
             return when (val temp = INSTANCE) {

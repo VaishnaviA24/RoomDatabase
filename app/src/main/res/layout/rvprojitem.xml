@@ -1,36 +1,25 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-<TableLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:shrinkColumns="*"
-    android:stretchColumns="*"
-    >
-
-<TableRow
-    android:id="@+id/row1"
-    android:layout_width="fill_parent"
-    android:background="@drawable/border"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/tv_projId"
+        android:id="@+id/tvProjId"
         style="@style/word_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
         android:layout_gravity="start"
         android:layout_weight="0.2"
-        tools:text="Project id"
+        tools:text="@string/project_id"
         android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/tv_projName"
+        android:id="@+id/tvProjName"
         style="@style/word_title"
-        tools:text="Project Name"
+        tools:text="@string/project_name"
         android:layout_weight="0.3"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
@@ -40,7 +29,7 @@
         />
 
     <ImageView
-        android:id="@+id/ic_projEdit"
+        android:id="@+id/icProjEdit"
         android:src="@drawable/ic_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,22 +37,17 @@
         android:layout_gravity="end"
         android:scaleType="center"
         android:layout_weight="0.2"
-        android:onClick="onEditClick"
-        tools:text="email" />
+        android:contentDescription="@string/edit_project" />
 
     <ImageView
-        android:id="@+id/ic_projDelete"
-        android:src="@drawable/ic_baseline_delete_24"
+        android:id="@+id/icProjDelete"
+        android:src="@drawable/ic_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="6dp"
         android:layout_gravity="end"
         android:scaleType="center"
         android:layout_weight="0.2"
-        android:onClick="onDeleteClick"
-        tools:text="email" />
+        android:contentDescription="@string/delete" />
 
-    </TableRow>
-
-    </TableLayout>
-</layout>
+</LinearLayout>

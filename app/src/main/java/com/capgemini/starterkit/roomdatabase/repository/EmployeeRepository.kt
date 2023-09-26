@@ -2,7 +2,6 @@ package com.capgemini.starterkit.roomdatabase.repository
 
 import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
-import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithMultipleProjects
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeWithProject
 import kotlinx.coroutines.flow.Flow
 
@@ -26,12 +25,7 @@ class EmployeeRepository(private val employeeDao: EmployeeDao) {
         return employeeDao.getEmpByName(searchName)
     }
 
-    fun getEmployeeWithProject(employeeId: Int): EmployeeWithProject {
-        return employeeDao.getEmployeeWithProject(employeeId)
+    fun getEmployeeWithProject(projectId: String): List<EmployeeWithProject> {
+        return employeeDao.getEmployeeWithProject(projectId)
     }
-
-    fun getEmployeeWithMultipleProjects(employeeId: Int): EmployeeWithMultipleProjects {
-        return employeeDao.getEmployeeWithMultipleProjects(employeeId)
-    }
-
 }

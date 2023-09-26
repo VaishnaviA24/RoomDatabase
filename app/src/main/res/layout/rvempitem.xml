@@ -1,36 +1,25 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-<TableLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:shrinkColumns="*"
-    android:stretchColumns="*"
-    >
-
-<TableRow
-    android:id="@+id/row1"
-    android:layout_width="fill_parent"
-    android:background="@drawable/border"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/itemProjectId"
         style="@style/word_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_gravity="start"
         android:layout_weight="0.2"
-        tools:text="projectEntity id"
-        android:textColor="@color/black"/>
+        android:gravity="center"
+        android:textColor="@color/black"
+        tools:text="@string/project_id" />
 
     <TextView
         android:id="@+id/itemName"
         style="@style/word_title"
-        tools:text="name"
+        tools:text="@string/username"
         android:layout_weight="0.3"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
@@ -42,27 +31,23 @@
     <TextView
         android:id="@+id/itemEmail"
         style="@style/word_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_gravity="start"
-        android:maxLines="2"
         android:layout_weight="0.5"
-        tools:text="email"
-        android:textColor="@color/black"/>
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/black"
+        tools:text="@string/email" />
 
     <ImageView
-        android:id="@+id/deleteIcon"
-        android:src="@drawable/ic_baseline_delete_24"
+        android:src="@drawable/ic_delete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="6dp"
         android:layout_gravity="end"
         android:scaleType="center"
         android:layout_weight="0.2"
-        tools:text="email" />
+        android:contentDescription="@string/delete" />
 
-    </TableRow>
-
-    </TableLayout>
-</layout>
+</LinearLayout>
