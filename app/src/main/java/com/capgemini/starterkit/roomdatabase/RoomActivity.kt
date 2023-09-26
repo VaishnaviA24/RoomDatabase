@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.adapter.EmployeeListAdapter
@@ -47,106 +49,123 @@ class RoomActivity : AppCompatActivity() {
 
         binding.btnAddemp.setOnClickListener {
             binding.container.removeAllViews()
-            val employeeForm =
-                LayoutInflater.from(this)
-                    .inflate(R.layout.employee_form, binding.container, true)
-
-            val btnSave = employeeForm.findViewById<Button>(R.id.btn_empSave)
-            val userName = employeeForm.findViewById<EditText>(R.id.userName)
-            val email = employeeForm.findViewById<EditText>(R.id.email)
-            val projectId = employeeForm.findViewById<EditText>(R.id.projectId)
-
-            btnSave.setOnClickListener {
-                val name = userName.text.toString()
-                val userEmail = email.text.toString()
-                val projectID = projectId.text.toString()
-
-                // If the projectID is empty, setting it to "DEFAULT"
-                val projectIdValue = projectID.ifEmpty { "DEFAULT" }
-
-                val employee =
-                    EmployeeEntity(name = name, email = userEmail, empProjectId = projectIdValue)
-
-                employeeViewModel.insertData(employee)
-
-                userName.text.clear()
-                email.text.clear()
-                projectId.text.clear()
-            }
+            addEmployee()
         }
 
         binding.btnDisplayemp.setOnClickListener {
             binding.container.removeAllViews()
 
-            val employeeListLayout =
-                LayoutInflater.from(this)
-                    .inflate(R.layout.employee_db, binding.container, false)
-
-            binding.container.addView(employeeListLayout)
-
-            val recyclerView = employeeListLayout.findViewById<RecyclerView>(R.id.rv_empData)
-
-            recyclerView.layoutManager = LinearLayoutManager(this)
-
-            val adapter = EmployeeListAdapter()
-            recyclerView.adapter = adapter
-
-            employeeViewModel.getAllData.observe(this) { employees ->
-                adapter.submitList(employees)
-            }
+            binding.btnSearchEmp.isVisible = true
+            binding.etEmpvalue.isVisible = true
+            displayEmployeeData()
         }
 
         binding.btnAddproject.setOnClickListener {
             binding.container.removeAllViews()
-            val projectForm = LayoutInflater.from(this)
-                .inflate(R.layout.project_form, binding.container, true)
-
-            val btnSaveProject = projectForm.findViewById<Button>(R.id.btn_projSave)
-            val projName = projectForm.findViewById<EditText>(R.id.projName)
-            val projId = projectForm.findViewById<EditText>(R.id.projectId)
-
-            btnSaveProject.setOnClickListener {
-                val projectName = projName.text.toString()
-                val projectId = projId.text.toString()
-
-                val projectIdValue = projectId.ifEmpty { "DEFAULT" }
-
-                val projectEntity = ProjectEntity(
-                    projectName = projectName,
-                    projectId = projectIdValue,
-                )
-
-                projectViewModel.insertProjectValue(projectEntity)
-
-                projName.text.clear()
-                projId.text.clear()
-            }
+            addProject()
         }
 
         binding.btnDisplayproj.setOnClickListener {
             binding.container.removeAllViews()
-            val projectListLayout = LayoutInflater.from(this)
-                .inflate(R.layout.project_db, binding.container, false)
+            displayProjectData()
+        }
+    }
 
-            binding.container.addView(projectListLayout)
+    private fun displayProjectData() {
+        val projectListLayout = LayoutInflater.from(this)
+            .inflate(R.layout.project_db, binding.container, false)
 
-            val recyclerView = projectListLayout.findViewById<RecyclerView>(R.id.rv_projData)
+        binding.container.addView(projectListLayout)
 
-            recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerView = projectListLayout.findViewById<RecyclerView>(R.id.rv_projData)
 
-            val adapter = ProjectListAdapter(
-                editClickListener = { project ->
-                    updateProjectDialog(project)
-                },
-                deleteClickListener = { project ->
-                    projectViewModel.deleteById(project)
-                }
-            )
-            recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-            projectViewModel.getAllProjData.observe(this) { projects ->
-                adapter.submitList(projects)
+        val adapter = ProjectListAdapter(
+            editClickListener = { project ->
+                updateProjectDialog(project)
+            },
+            deleteClickListener = { project ->
+                projectViewModel.deleteById(project)
             }
+        )
+        recyclerView.adapter = adapter
+
+        projectViewModel.getAllProjData.observe(this) { projects ->
+            adapter.submitList(projects)
+        }
+    }
+
+    private fun displayEmployeeData() {
+        val employeeListLayout =
+            LayoutInflater.from(this)
+                .inflate(R.layout.employee_db, binding.container, false)
+
+        binding.container.addView(employeeListLayout)
+
+        val recyclerView = employeeListLayout.findViewById<RecyclerView>(R.id.rv_empData)
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val adapter = EmployeeListAdapter()
+        recyclerView.adapter = adapter
+
+        employeeViewModel.getAllData.observe(this) { employees ->
+            adapter.submitList(employees)
+        }
+    }
+
+    private fun addProject() {
+        val projectForm = LayoutInflater.from(this)
+            .inflate(R.layout.project_form, binding.container, true)
+
+        val btnSaveProject = projectForm.findViewById<Button>(R.id.btn_projSave)
+        val projName = projectForm.findViewById<EditText>(R.id.projName)
+        val projId = projectForm.findViewById<EditText>(R.id.projectId)
+
+        btnSaveProject.setOnClickListener {
+            val projectName = projName.text.toString()
+            val projectId = projId.text.toString()
+
+            val projectIdValue = projectId.ifEmpty { "DEFAULT" }
+
+            val projectEntity = ProjectEntity(
+                projectName = projectName,
+                projectId = projectIdValue,
+            )
+            projectViewModel.insertProjectValue(projectEntity)
+
+            projName.text.clear()
+            projId.text.clear()
+        }
+    }
+
+    private fun addEmployee() {
+        val employeeForm =
+            LayoutInflater.from(this)
+                .inflate(R.layout.employee_form, binding.container, true)
+
+        val btnSave = employeeForm.findViewById<Button>(R.id.btn_empSave)
+        val userName = employeeForm.findViewById<EditText>(R.id.userName)
+        val email = employeeForm.findViewById<EditText>(R.id.email)
+        val projectId = employeeForm.findViewById<EditText>(R.id.projectId)
+
+        btnSave.setOnClickListener {
+            val name = userName.text.toString()
+            val userEmail = email.text.toString()
+            val projectID = projectId.text.toString()
+
+            // If the projectID is empty, setting it to "DEFAULT"
+            val projectIdValue = projectID.ifEmpty { "DEFAULT" }
+
+            val employee =
+                EmployeeEntity(name = name, email = userEmail, empProjectId = projectIdValue)
+
+            employeeViewModel.insertData(employee)
+
+            userName.text.clear()
+            email.text.clear()
+            projectId.text.clear()
         }
     }
 
@@ -162,7 +181,7 @@ class RoomActivity : AppCompatActivity() {
         val etProjectName = dialogView.findViewById<EditText>(R.id.et_newProjName)
         val btnUpdate = dialogView.findViewById<Button>(R.id.btn_updateProject)
 
-        etProjectId.setText(project.projectId.toString())
+        etProjectId.setText(project.projectId)
         etProjectName.setText(project.projectName)
 
         dialogBuilder.setTitle("Edit Project")

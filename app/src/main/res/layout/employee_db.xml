@@ -5,30 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_empvalue"
-        android:layout_width="273dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:hint="Enter either Employee id or name"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/rv_empData"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
-
-    <Button
-        android:id="@+id/btn_searchEmp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="Search"
-        app:layout_constraintBottom_toTopOf="@+id/rv_empData"
-        app:layout_constraintStart_toEndOf="@+id/et_empvalue"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_empData"
         android:layout_width="match_parent"
