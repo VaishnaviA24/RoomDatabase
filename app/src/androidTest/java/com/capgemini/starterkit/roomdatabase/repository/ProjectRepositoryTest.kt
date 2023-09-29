@@ -89,4 +89,28 @@ class ProjectRepositoryTest {
         assertNotNull(projectsFromDb)
         assertTrue(projectsFromDb.isEmpty())
     }
+
+    @Test
+    fun getProjectsSortedByName() = runBlocking {
+        // Insert projects into the database
+        val project1 = ProjectEntity("1", "Project One")
+        val project2 = ProjectEntity("2", "Project Two")
+        val project3 = ProjectEntity("3", "Project Three")
+        val project4 = ProjectEntity("4", "Project Four")
+        val unsortedProjects = listOf(project2, project4, project1, project3)
+        projectDao.insertProjects(unsortedProjects)
+
+        // Retrieve sorted projects
+        val sortedProjects = projectRepository.getProjectsSortedByName().firstOrNull()
+        Log.d("ProjectRepositoryTest", "getProjectsSortedByName - Sorted projects: $sortedProjects")
+
+        assertNotNull(sortedProjects)
+        assertEquals(4, sortedProjects!!.size)
+
+        // Check if the projects are sorted by name in ascending order
+        assertEquals("Project Four", sortedProjects[0].projectName)
+        assertEquals("Project One", sortedProjects[1].projectName)
+        assertEquals("Project Three", sortedProjects[2].projectName)
+        assertEquals("Project Two", sortedProjects[3].projectName)
+    }
 }

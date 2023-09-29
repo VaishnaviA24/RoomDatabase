@@ -1,5 +1,6 @@
 package com.capgemini.starterkit.roomdatabase.repository
 
+import androidx.lifecycle.LiveData
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
 import com.capgemini.starterkit.roomdatabase.room.dao.ProjectDao
 import kotlinx.coroutines.Dispatchers
@@ -36,4 +37,13 @@ class ProjectRepository(private val projectDao: ProjectDao) {
     suspend fun deleteProject(projectEntity: ProjectEntity) {
         projectDao.deleteProject(projectEntity)
     }
+
+    fun getProjectsSortedByName(): Flow<List<ProjectEntity>> {
+        return projectDao.getProjectsSortedByName()
+    }
+
+    fun getProjectCount(): LiveData<Int> {
+        return projectDao.getProjectCount()
+    }
+
 }

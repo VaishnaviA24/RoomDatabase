@@ -1,5 +1,6 @@
 package com.capgemini.starterkit.roomdatabase.room.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -29,10 +30,9 @@ interface ProjectDao {
     suspend fun deleteProject(projectEntity: ProjectEntity)
 
     @Query("SELECT * FROM Project ORDER BY projectName ASC")
-    fun getProjectsSortedByName(): List<ProjectEntity>
+    fun getProjectsSortedByName(): Flow<List<ProjectEntity>>
 
-    // Returns the count of records
     @Query("SELECT COUNT(*) FROM Project")
-    fun getProjectCount(): Int
+    fun getProjectCount(): LiveData<Int>
 
 }

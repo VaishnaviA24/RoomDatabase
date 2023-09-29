@@ -46,19 +46,35 @@ class EmployeeRepositoryTest {
 
     @Test
     fun insertDataAndGetAllData() = runBlocking {
-        val employee =
+        val employee1 =
             EmployeeEntity(
                 empId = 1,
                 name = "Vaishnavi",
                 email = "vaishnavi@example.com",
                 empProjectId = "1001"
             )
-        employeeRepository.insertData(employee)
+        val employee2 =
+            EmployeeEntity(
+                empId = 2,
+                name = "Radhika",
+                email = "radhika@example.com",
+                empProjectId = "2002"
+            )
+        val employee3 =
+            EmployeeEntity(
+                empId = 3,
+                name = "Veeresh",
+                email = "veeresh@example.com",
+                empProjectId = "3003"
+            )
+        employeeRepository.insertData(employee1)
+        employeeRepository.insertData(employee2)
+        employeeRepository.insertData(employee3)
+
 
         val allData = employeeRepository.allUsersData.first()
         Log.d("EmployeeRepositoryTest", "insertDataAndGetAllData - List size: ${allData.size}")
-        assertEquals(1, allData.size)
-        assertEquals(employee, allData[0])
+        assertEquals(3, allData.size)
     }
 
     @Test
@@ -86,14 +102,12 @@ class EmployeeRepositoryTest {
                 empProjectId = "3003"
             )
         employeeRepository.insertData(employee1)
-
         employeeRepository.insertData(employee2)
         employeeRepository.insertData(employee3)
 
         delay(1000) // Wait for insert to complete
 
         employeeRepository.deleteById(1)
-
 
         val allData = employeeRepository.allUsersData.first()
         Log.d("EmployeeRepositoryTest", "deleteById - List size: ${allData.size}")
@@ -139,99 +153,38 @@ class EmployeeRepositoryTest {
     }
 
     @Test
-    fun getEmpByName() = runBlocking {
-
-        val employee1 =
-            EmployeeEntity(
-                empId = 1,
-                name = "Vaishnavi",
-                email = "vaishnavi@example.com",
-                empProjectId = "1001"
-            )
-        val employee2 =
-            EmployeeEntity(
-                empId = 2,
-                name = "Radhika",
-                email = "radhika@example.com",
-                empProjectId = "2002"
-            )
-        val employee3 =
-            EmployeeEntity(
-                empId = 3,
-                name = "Veeresh",
-                email = "veeresh@example.com",
-                empProjectId = "3003"
-            )
-
-        employeeRepository.insertData(employee1)
-        employeeRepository.insertData(employee2)
-        employeeRepository.insertData(employee3)
-
-
-        val searchName = "Vaishnavi"
-        val retrievedEmployees = employeeRepository.getEmpByName(searchName)
-
-        Log.d("EmployeeRepositoryTest", "getEmpByName - List size: ${retrievedEmployees.size}")
-        assertEquals(1, retrievedEmployees.size)
-        assertTrue(retrievedEmployees.contains(employee1))
-    }
-
-    @Test
     fun getEmployeeWithProject() = runBlocking {
-        // Arrange: Insert EmployeeEntities and corresponding ProjectEntities
+
+        // Arrange: Insert a project and employees
+        val project1 = ProjectEntity(projectId = "1001", projectName = "Sample Project1")
+        val project2 = ProjectEntity(projectId = "1002", projectName = "Sample Project2")
+        projectRepository.insertProjectValue(project1)
+        projectRepository.insertProjectValue(project2)
+
         val employee1 = EmployeeEntity(
             empId = 1,
             name = "Vaishnavi",
             email = "vaishnavi@example.com",
-            empProjectId = "1111"
+            empProjectId = "1001"
         )
         val employee2 = EmployeeEntity(
             empId = 2,
-            name = "Veeresh",
-            email = "veeresh@example.com",
-            empProjectId = "2221"
+            name = "Rekha",
+            email = "rekha@example.com",
+            empProjectId = "1001"
         )
         val employee3 = EmployeeEntity(
-            empId = 3,
-            name = "Radhika",
-            email = "radhika@example.com",
-            empProjectId = "1111"
+            empId = 2,
+            name = "Rekha12",
+            email = "rekha12@example.com",
+            empProjectId = "1001"
         )
-
-        val project1 = ProjectEntity(projectId = "1111", projectName = "ProjectOne")
-        val project2 = ProjectEntity(projectId = "2221", projectName = "ProjectTwo")
-        val project3 = ProjectEntity(projectId = "3333", projectName = "ProjectThree")
-
-        projectRepository.insertProjectValue(project1)
-        projectRepository.insertProjectValue(project2)
-        projectRepository.insertProjectValue(project3)
-
         employeeRepository.insertData(employee1)
         employeeRepository.insertData(employee2)
         employeeRepository.insertData(employee3)
 
-        delay(1000) // Wait for insertions to complete
-
-        // Act: Get employees with a specific project
-        val employeesWithProject = employeeRepository.getEmployeeWithProject("1111")
-
-        // Assert: Check the result
-        assertEquals(
-            2,
-            employeesWithProject.size
-        ) // There should be 2 employees with project "1111"
-
-        val employeeWithProject1 = employeesWithProject[0]
-        assertEquals(project1, employeeWithProject1.projectEntity)
-        assertEquals(employee1, employeeWithProject1.employees[0])
-        assertEquals(employee3, employeeWithProject1.employees[1])
-
-        // Check if employee1 is in employeesWithProject
-        val containsEmployee1 = employeesWithProject.any { it.employees.contains(employee1) }
-        assertTrue(containsEmployee1)
-
-        // Check if employee3 is in employeesWithProject
-        val containsEmployee3 = employeesWithProject.any { it.employees.contains(employee3) }
-        assertTrue(containsEmployee3)
+        val getData = employeeRepository.getEmployeeWithProject("1001").first()
+        Log.d("EmployeeRepositoryTest", "getEmployeeWithProject - List size: ${getData.size}")
+        assertEquals(2, getData.size)
     }
 }

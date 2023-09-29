@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.capgemini.starterkit.roomdatabase.repository.ProjectRepository
 import com.capgemini.starterkit.roomdatabase.room.entity.ProjectEntity
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class ProjectViewModel(
@@ -13,6 +14,8 @@ class ProjectViewModel(
 ) : ViewModel() {
 
     val getAllProjData: LiveData<List<ProjectEntity>> = projectRepository.allProjectsData.asLiveData()
+    val projectCount: LiveData<Int> = projectRepository.getProjectCount()
+
 
     fun insertProjects() {
         viewModelScope.launch {
@@ -38,4 +41,7 @@ class ProjectViewModel(
         }
     }
 
+    fun getProjectsSortedByName(): Flow<List<ProjectEntity>> {
+        return projectRepository.getProjectsSortedByName()
+    }
 }

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.capgemini.starterkit.roomdatabase.databinding.RvempitemBinding
 import com.capgemini.starterkit.roomdatabase.room.entity.EmployeeEntity
 
-class EmployeeListAdapter : ListAdapter<EmployeeEntity,
+class EmployeeListAdapter(
+    private val deleteClickListener: (EmployeeEntity) -> Unit
+) : ListAdapter<EmployeeEntity,
         EmployeeListAdapter.EmployeeViewHolder>(EmployeeDiffCallback()) {
 
     private lateinit var binding: RvempitemBinding
@@ -31,6 +33,8 @@ class EmployeeListAdapter : ListAdapter<EmployeeEntity,
             binding.itemName.text = employee.name
             binding.itemEmail.text = employee.email
             binding.itemProjectId.text = employee.empProjectId
+
+            binding.icEmpDelete.setOnClickListener { deleteClickListener(employee) }
         }
     }
 }

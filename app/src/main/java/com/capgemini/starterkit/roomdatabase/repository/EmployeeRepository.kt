@@ -25,7 +25,7 @@ class EmployeeRepository(private val employeeDao: EmployeeDao) {
         return employeeDao.getEmpByName(searchName)
     }
 
-    fun getEmployeeWithProject(projectId: String): List<EmployeeWithProject> {
+    fun getEmployeeWithProject(projectId: String): Flow<List<EmployeeWithProject>> {
         return employeeDao.getEmployeeWithProject(projectId)
     }
 }

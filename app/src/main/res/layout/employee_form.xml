@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
+    android:padding="@dimen/padding_10dp"
     android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
@@ -18,40 +19,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
-        android:ems="10"
+        android:autofillHints="@string/username"
         android:hint="@string/username"
         android:inputType="text"
-        android:singleLine="true"
-        android:autofillHints="@string/username" />
+        android:minHeight="@dimen/min_height_48dp"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
-        android:ems="10"
+        android:autofillHints="@string/email"
         android:hint="@string/email"
         android:inputType="text|textWebEmailAddress"
-        android:singleLine="true"
-        android:autofillHints="@string/email" />
+        android:minHeight="@dimen/min_height_48dp"
+        android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/projectId"
+    <Spinner
+        android:id="@+id/spinnerProjectId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
-        android:ems="10"
+        android:autofillHints="@string/email"
         android:hint="@string/project_id"
         android:inputType="number"
-        android:singleLine="true"
-        android:autofillHints="@string/email" />
+        android:minHeight="@dimen/min_height_48dp"
+        android:singleLine="true" />
 
     <Button
-        android:id="@+id/btn_empSave"
+        android:id="@+id/btnEmpSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_margin"
         android:background="@color/colorPrimary"
         android:text="@string/button_save"
-        android:textColor="@color/buttonLabel" />
+        android:textColor="@color/white" />
 </LinearLayout>

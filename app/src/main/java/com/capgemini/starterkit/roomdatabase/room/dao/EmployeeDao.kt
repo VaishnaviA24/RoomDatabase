@@ -32,5 +32,5 @@ interface EmployeeDao {
 
     @Transaction
     @Query("SELECT * FROM Employee JOIN Project ON Employee.empProjectId = Project.projectId WHERE Employee.empProjectId = :projectId")
-    fun getEmployeeWithProject(projectId: String): List<EmployeeWithProject>
+    fun getEmployeeWithProject(projectId: String): Flow<List<EmployeeWithProject>>
 }

@@ -3,122 +3,128 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_10dp">
 
     <Button
-        android:id="@+id/btn_addemp"
+        android:id="@+id/btnAddEmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_user"
-        app:layout_constraintBottom_toTopOf="@+id/btn_addproject"
-        app:layout_constraintEnd_toStartOf="@+id/btn_displayemp"
-        app:layout_constraintHorizontal_bias="0.596"
+        android:layout_margin="@dimen/margin_5dp"
+        android:text="@string/add_emp"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddProj"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_addproject"
+        android:id="@+id/btnAddProj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
         android:text="@string/add_project"
-        app:layout_constraintBottom_toTopOf="@+id/container"
-        app:layout_constraintEnd_toStartOf="@+id/btn_displayproj"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAddEmp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_displayemp"
+        android:id="@+id/btnDisplayEmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
         android:text="@string/display_employee_data"
-        app:layout_constraintBottom_toTopOf="@+id/btn_displayproj"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.867"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAddEmp" />
 
     <Button
-        android:id="@+id/btn_displayproj"
+        android:id="@+id/btnDisplayProj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
         android:text="@string/display_project_data"
-        app:layout_constraintBottom_toTopOf="@+id/container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.917"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintStart_toEndOf="@+id/btnDisplayEmp"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddEmp" />
 
-<!--    Hidden fields-->
     <EditText
-        android:id="@+id/et_empvalue"
-        android:layout_width="273dp"
-        android:layout_height="42dp"
-        android:ems="10"
+        android:id="@+id/etEmpSearchValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
+        android:autofillHints="@string/enter_either_employee_id_or_name"
         android:hint="@string/enter_either_employee_id_or_name"
         android:inputType="text"
+        android:minHeight="48dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_addproject"
-        android:autofillHints="@string/enter_either_employee_id_or_name" />
+        app:layout_constraintTop_toBottomOf="@+id/btnDisplayEmp" />
 
     <Button
-        android:id="@+id/btn_searchEmp"
+        android:id="@+id/btnSearchEmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
+        android:layout_margin="@dimen/margin_5dp"
         android:text="@string/search"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_empvalue"
-        app:layout_constraintTop_toBottomOf="@+id/btn_displayproj" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/etEmpSearchValue"
+        app:layout_constraintTop_toBottomOf="@+id/btnDisplayEmp" />
 
     <Button
-        android:id="@+id/btn_ascProjValue"
+        android:id="@+id/btnAscProjValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
         android:text="@string/sort_in_ascending_order"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/container"
-        app:layout_constraintEnd_toStartOf="@+id/tv_projCount"
-        app:layout_constraintHorizontal_bias="0.704"
+        app:layout_constraintEnd_toStartOf="@+id/btnJoinQuery"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_addproject"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchEmp" />
 
-    <TextView
-        android:id="@+id/tv_projCount"
+    <Button
+        android:id="@+id/btnJoinQuery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/count"
+        android:layout_margin="@dimen/margin_5dp"
+        android:text="@string/join_query"
         android:visibility="gone"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toEndOf="@+id/btnAscProjValue"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchEmp" />
+
+    <Spinner
+        android:id="@+id/spinnerProjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/btnJoinQuery"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_displayproj" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchEmp" />
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_width="412dp"
-        android:layout_height="366dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_5dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvProjCount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/btnAscProjValue">
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvProjCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5dp"
+        android:text="@string/count"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_size_20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
