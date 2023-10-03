@@ -11,7 +11,7 @@ import com.capgemini.starterkit.roomdatabase.room.dao.EmployeeDao
 
 @Database(
     entities = [EmployeeEntity::class, ProjectEntity::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 abstract class MyDatabase : RoomDatabase() {
